@@ -69,7 +69,7 @@ namespace ucetvhospode.ViewModels
         public decimal ShareWithTip => model.ShareWithTip;
 
         public ICommand IncreaseGuestsCommand => new Command(IncreaseGuests);
-        public ICommand DecreaseGuestsCommand => new Command(DecreaseGuests, () => NumberOfGuests > 1);
+        public ICommand DecreaseGuestsCommand => new Command(DecreaseGuests);
 
         private void IncreaseGuests()
         {
@@ -77,7 +77,6 @@ namespace ucetvhospode.ViewModels
             OnPropertyChanged(nameof(NumberOfGuests));
             OnPropertyChanged(nameof(Share));
             OnPropertyChanged(nameof(ShareWithTip));
-            (DecreaseGuestsCommand as Command)?.ChangeCanExecute(); 
         }
 
         private void DecreaseGuests()
@@ -88,8 +87,6 @@ namespace ucetvhospode.ViewModels
                 OnPropertyChanged(nameof(NumberOfGuests));
                 OnPropertyChanged(nameof(Share));
                 OnPropertyChanged(nameof(ShareWithTip));
-                (DecreaseGuestsCommand as Command)?.ChangeCanExecute();
-
             }
         }
 

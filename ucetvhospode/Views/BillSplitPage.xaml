@@ -2,23 +2,87 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ucetvhospode.Views.BillSplitPage"
-             Title="BillSplitPage">
+             BackgroundColor="#2C2C2C">
 
-    <StackLayout Padding="20">
-        <Entry Placeholder="Účtovaná částka"
-               Text="{Binding BillAmount, Mode=TwoWay}" 
-               Keyboard="Numeric"/>
 
-        <Slider Minimum="0" Maximum="10"
-                Value="{Binding TipPercentage, Mode=TwoWay}"/>
+    <VerticalStackLayout Padding="20" BackgroundColor="White">
 
-        <Label Text="{Binding TotalAmount, StringFormat='Celkem: {0:C}'}"/>
-        <Label Text="{Binding Share, StringFormat='Podíl: {0:C}'}"/>
-        <Label Text="{Binding ShareWithTip, StringFormat='Velké číslo: {0:C}'}"/>
+        <Label Text="Účet v hospodě"
+               FontSize="30"
+               FontAttributes="Bold"
+               HorizontalTextAlignment="Center"
+               TextColor="White"
+               Margin="0,0,0,20" />
 
-        <Button Command="{Binding DecreaseGuestsCommand}" Text="-"/>
-        <Label Text="{Binding NumberOfGuests}"/>
-        <Button Command="{Binding IncreaseGuestsCommand}" Text="+"/>
-    </StackLayout>
+        <Frame MaximumWidthRequest="500" BackgroundColor="#1e1e1e">
+            <StackLayout >
+                <Frame  BackgroundColor="Black" Padding="20" CornerRadius="5" BorderColor="White">
+                    <Grid Padding="20" VerticalOptions="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+
+                        <Label VerticalOptions="Center" Grid.Column="0" Text="{Binding ShareWithTip, StringFormat='{0} Kč'}"
+                       FontSize="Large"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       HorizontalOptions="Center" />
+
+                        <VerticalStackLayout VerticalOptions="Center" Grid.Column="1">
+                            <Label Text="Celkem" HorizontalOptions="Center"></Label>
+                            <Label HorizontalOptions="Center" Text="{Binding TotalAmount, StringFormat='{0} Kč'}"
+                           Grid.Column="0"
+                           TextColor="White" />
+                            <Label Text="Podíl" HorizontalOptions="Center"></Label>
+
+                            <Label HorizontalOptions="Center" Text="{Binding Share, StringFormat='{0} Kč'}"
+                           Grid.Column="2"
+                           TextColor="White" />
+                        </VerticalStackLayout>
+
+                    </Grid>
+                </Frame>
+
+                <Label HorizontalOptions="Center" Margin="20" Text="Celý účet"></Label>
+                <Entry Placeholder="Účtovaná částka"
+               Text="{Binding BillAmount, Mode=TwoWay}"
+               Keyboard="Numeric"
+               TextColor="White"
+               Margin="0,10,0,0" />
+
+                <Label HorizontalOptions="Center" Margin="20" Text="Spropitné"></Label>
+                <Slider Minimum="0" Maximum="20" MinimumTrackColor="Purple" MaximumTrackColor="White" ThumbColor="Purple"
+                Value="{Binding TipPercentage, Mode=TwoWay}" 
+                    Margin="0,0,0,10" />
+                    <Label HorizontalOptions="Center" Text="{Binding TipPercentage, StringFormat='{0}%'}" TextColor="White"></Label>
+
+                <Label HorizontalOptions="Center" Margin="20" Text="Počet osob"></Label>
+                <StackLayout Orientation="Horizontal"
+                     HorizontalOptions="Center"
+                     Margin="0,10,0,0">
+                    <Button Command="{Binding DecreaseGuestsCommand}"
+                    Text="-"
+                    WidthRequest="40"
+                    BackgroundColor="White"
+                    TextColor="Black"/>
+
+                    <Label Text="{Binding NumberOfGuests}"
+                   HorizontalOptions="CenterAndExpand" 
+                   VerticalOptions="CenterAndExpand"
+                   Padding="10"></Label>
+                    
+                    <Button Command="{Binding IncreaseGuestsCommand}"
+                    Text="+"
+                    WidthRequest="40"
+                    BackgroundColor="Purple"
+                    TextColor="White"/>
+                </StackLayout>
+            </StackLayout>
+            
+        </Frame>
+
+    </VerticalStackLayout>
 
 </ContentPage>
