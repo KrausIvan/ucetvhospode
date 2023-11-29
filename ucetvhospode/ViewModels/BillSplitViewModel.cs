@@ -77,6 +77,7 @@ namespace ucetvhospode.ViewModels
             OnPropertyChanged(nameof(NumberOfGuests));
             OnPropertyChanged(nameof(Share));
             OnPropertyChanged(nameof(ShareWithTip));
+            (DecreaseGuestsCommand as Command)?.ChangeCanExecute(); 
         }
 
         private void DecreaseGuests()
